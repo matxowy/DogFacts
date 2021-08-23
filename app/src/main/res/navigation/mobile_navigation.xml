@@ -9,10 +9,18 @@
         android:id="@+id/listOfFactsFragment"
         android:name="com.matxowy.dogfacts.ui.list.ListOfDogFactsFragment"
         android:label="list_of_facts_fragment"
-        tools:layout="@layout/list_of_dog_facts_fragment" />
+        tools:layout="@layout/list_of_dog_facts_fragment" >
+        <action
+            android:id="@+id/actionDetail"
+            app:destination="@id/detailOfFactFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailOfFactFragment"
         android:name="com.matxowy.dogfacts.ui.detail.DetailOfDogFactFragment"
         android:label="detail_of_fact_fragment"
-        tools:layout="@layout/detail_of_dog_fact_fragment" />
+        tools:layout="@layout/detail_of_dog_fact_fragment" >
+        <argument
+            android:name="itemId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

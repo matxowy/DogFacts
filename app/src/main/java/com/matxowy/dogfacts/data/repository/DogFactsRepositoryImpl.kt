@@ -9,7 +9,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
-import org.threeten.bp.ZonedDateTime
 
 const val NUMBER_OF_FACTS = 30
 
@@ -32,7 +31,10 @@ class DogFactsRepositoryImpl(
     }
 
     override suspend fun getDogFactById(id: Int): LiveData<DogFactItem> {
-        TODO("Not yet implemented")
+        return withContext(Dispatchers.IO) {
+            initDogFactsData()
+            dogFactsDao.getDogFactById(id)
+        }
     }
 
     private fun persistFetchedFacts(fetchedDogFacts: List<DogFactItem>) {

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.matxowy.dogfacts.R
 import com.matxowy.dogfacts.data.db.entity.DogFactItem
@@ -50,11 +50,15 @@ class ListOfDogFactsFragment : ScopedFragment(), KodeinAware {
 
             group_loading.visibility = View.GONE
 
-            (activity as? AppCompatActivity)?.supportActionBar?.title = "Dog Facts"
+            updateTitle("Dog Facts")
 
             initRecyclerView(dogFactEntries.toDogFactsItems())
 
         })
+    }
+
+    private fun updateTitle(title: String) {
+        (activity as? AppCompatActivity)?.supportActionBar?.title = title
     }
 
     private fun List<DogFactItem>.toDogFactsItems() : List<DogFactsItem> {
@@ -74,9 +78,16 @@ class ListOfDogFactsFragment : ScopedFragment(), KodeinAware {
         }
 
         groupAdapter.setOnItemClickListener { item, view ->
-            Toast.makeText(this@ListOfDogFactsFragment.context, "Clicked", Toast.LENGTH_SHORT).show()
+            (item as? DogFactsItem)?.let {
+                it.dogFactItem.id?.let { itemId -> showDogFactDetail(itemId, view) }
+            }
         }
-
     }
+
+    private fun showDogFactDetail(itemId: Int, view: View) {
+        val actionDetail = ListOfDogFactsFragmentDirections.actionDetail(itemId)
+        Navigation.findNavController(view).navigate(actionDetail)
+    }
+
 
 }

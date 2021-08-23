@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/matxo/Desktop/Android Studio/DogFacts/app/src/main/res/layout/activity_main.xml" value="0.3596014492753623" />
         <entry key="..\:/Users/matxo/Desktop/Android Studio/DogFacts/app/src/main/res/layout/detail_of_fact_fragment.xml" value="0.3596014492753623" />
+        <entry key="..\:/Users/matxo/Desktop/Android Studio/DogFacts/app/src/main/res/layout/item_dog_fact.xml" value="0.3233695652173913" />
+        <entry key="..\:/Users/matxo/Desktop/Android Studio/DogFacts/app/src/main/res/layout/list_of_dog_facts_fragment.xml" value="0.3233695652173913" />
         <entry key="..\:/Users/matxo/Desktop/Android Studio/DogFacts/app/src/main/res/layout/list_of_facts_fragment.xml" value="0.3596014492753623" />
       </map>
     </option>

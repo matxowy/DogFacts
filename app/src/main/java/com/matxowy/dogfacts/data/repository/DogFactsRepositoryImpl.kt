@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.threeten.bp.LocalDate
 import org.threeten.bp.ZonedDateTime
 
 const val NUMBER_OF_FACTS = 30
@@ -36,22 +37,28 @@ class DogFactsRepositoryImpl(
 
     private fun persistFetchedFacts(fetchedDogFacts: List<DogFactItem>) {
         GlobalScope.launch(Dispatchers.IO) {
+            initDateForEntries(fetchedDogFacts)
             dogFactsDao.insert(fetchedDogFacts)
         }
     }
 
+    private fun initDateForEntries(fetchedDogFacts: List<DogFactItem>) {
+        for (item in fetchedDogFacts) {
+            item.fetchedTime = LocalDate.now()
+        }
+    }
+
     private suspend fun initDogFactsData() {
-        /*val lastTimeFetched = dogFactsDao.getLastFetchedDogFactsTime()
+        val lastTimeFetched = dogFactsDao.getLastFetchedDogFactsTime()
 
         if (lastTimeFetched == null) {
             fetchDogFacts()
             return
         }
         if (isFetchDogFactsNeeded(lastTimeFetched)) {
+            dogFactsDao.deleteOldEntries() // if there is older entries than 1 day we're deleting them
             fetchDogFacts()
-        }*/
-
-        fetchDogFacts()
+        }
 
     }
 
@@ -59,8 +66,8 @@ class DogFactsRepositoryImpl(
         dogFactsNetworkDataSource.fetchFacts(NUMBER_OF_FACTS)
     }
 
-    private fun isFetchDogFactsNeeded(lastFetchTime: ZonedDateTime): Boolean {
-        val thirtyMinutesAgo = ZonedDateTime.now().minusMinutes(30)
-        return lastFetchTime.isBefore(thirtyMinutesAgo)
+    private fun isFetchDogFactsNeeded(lastFetchTime: LocalDate): Boolean {
+        val dayAgo = LocalDate.now().minusDays(1)
+        return lastFetchTime.isBefore(dayAgo)
     }
 }

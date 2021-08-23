@@ -12,7 +12,7 @@ import com.matxowy.dogfacts.internal.Converters
     entities = [DogFactItem::class],
     version = 1
 )
-/*@TypeConverters(Converters::class)*/
+@TypeConverters(Converters::class)
 abstract class DogFactsDatabase : RoomDatabase() {
     abstract fun dogFactsDao(): DogFactsDao
 

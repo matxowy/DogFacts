@@ -52,6 +52,7 @@ class DetailOfDogFactFragment : ScopedFragment(), KodeinAware {
         dogFact.observe(viewLifecycleOwner, Observer { dogFactEntry ->
             if (dogFactEntry == null) return@Observer
 
+            updateRandomBackground()
             updateTitle("Dog Fact")
             dogFactEntry.id?.let { updateFactNumber(it) }
             updateFetchDate(dogFactEntry.fetchedTime)
@@ -73,6 +74,13 @@ class DetailOfDogFactFragment : ScopedFragment(), KodeinAware {
 
     private fun updateFact(fact: String) {
         tv_fact.text = fact
+    }
+
+    private fun updateRandomBackground() {
+        val backgroundList = listOf(R.drawable.iv_background_1, R.drawable.iv_background_2,
+            R.drawable.iv_background_3, R.drawable.iv_background_4)
+
+        ll_detail.setBackgroundResource(backgroundList.random())
     }
 
 }

@@ -7,4 +7,7 @@ interface DogFactsRepository {
     suspend fun getDogFacts(): LiveData<List<DogFactItem>>
 
     suspend fun getDogFactById(id: Int): LiveData<DogFactItem>
+
+    suspend fun getNewDogFactsEntries(): LiveData<List<DogFactItem>>
+
 }

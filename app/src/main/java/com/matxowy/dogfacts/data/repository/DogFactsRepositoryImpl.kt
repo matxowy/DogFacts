@@ -37,6 +37,14 @@ class DogFactsRepositoryImpl(
         }
     }
 
+    override suspend fun getNewDogFactsEntries(): LiveData<List<DogFactItem>> {
+        return withContext(Dispatchers.IO) {
+            dogFactsDao.deleteOldEntries()
+            fetchDogFacts()
+            return@withContext dogFactsDao.getDogFacts()
+        }
+    }
+
     private fun persistFetchedFacts(fetchedDogFacts: List<DogFactItem>) {
         GlobalScope.launch(Dispatchers.IO) {
             initDateForEntries(fetchedDogFacts)

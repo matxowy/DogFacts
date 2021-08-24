@@ -1,47 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_detail"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailOfDogFactFragment"
     android:orientation="vertical"
-    tools:background="@drawable/iv_background_3">
+    tools:background="@drawable/iv_background_3"
+    tools:context=".ui.detail.DetailOfDogFactFragment">
 
     <TextView
         android:id="@+id/tv_fact_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fact #30"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
         android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        android:textColor="@color/white"
-        />
+        android:text="@string/tv_fact_id_value"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/tv_fetch_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update date of fact: 23.08.2021"
         android:layout_marginStart="12dp"
+        android:text="@string/tv_fetch_date_value"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:textColor="@color/white"
-        />
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/tv_fact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Text"
         android:gravity="center"
+        android:text="@string/tv_fact_value"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:textColor="@color/white"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
+        android:textColor="@color/white" />
 
 </LinearLayout>

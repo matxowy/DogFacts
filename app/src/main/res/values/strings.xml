@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Dog Facts</string>
+    <string name="tv_fact_id_value">Fact</string>
+    <string name="tv_fetch_date_value">Update date of fact: 23.08.2021</string>
+    <string name="tv_fact_value">Text</string>
+    <string name="tv_loading_value">Ładowanie</string>
 </resources>

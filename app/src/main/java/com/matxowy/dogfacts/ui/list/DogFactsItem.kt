@@ -11,7 +11,7 @@ class DogFactsItem(
 ): Item() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.apply {
-            textView_id.text = "#${dogFactItem.id.toString()}"
+            textView_id.text = "#${position+1}"
             updateIcon()
         }
     }

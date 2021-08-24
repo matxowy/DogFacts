@@ -1,9 +1,8 @@
 package com.matxowy.dogfacts.ui.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -37,9 +36,26 @@ class ListOfDogFactsFragment : ScopedFragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ListOfDogFactsViewModel::class.java)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(ListOfDogFactsViewModel::class.java)
+
+        setHasOptionsMenu(true)
 
         bindUi()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_fragment_list_of_dog_facts, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_refresh -> {
+                loadNewDogFacts()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun bindUi() = launch(Dispatchers.Main) {
@@ -61,7 +77,7 @@ class ListOfDogFactsFragment : ScopedFragment(), KodeinAware {
         (activity as? AppCompatActivity)?.supportActionBar?.title = title
     }
 
-    private fun List<DogFactItem>.toDogFactsItems() : List<DogFactsItem> {
+    private fun List<DogFactItem>.toDogFactsItems(): List<DogFactsItem> {
         return this.map {
             DogFactsItem(it)
         }
@@ -89,5 +105,9 @@ class ListOfDogFactsFragment : ScopedFragment(), KodeinAware {
         Navigation.findNavController(view).navigate(actionDetail)
     }
 
+    private fun loadNewDogFacts() = launch(Dispatchers.Main) {
+        viewModel.refreshDogFacts()
 
+        bindUi()
+    }
 }

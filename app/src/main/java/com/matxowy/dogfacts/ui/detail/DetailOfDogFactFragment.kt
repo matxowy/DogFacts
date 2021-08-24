@@ -22,7 +22,7 @@ class DetailOfDogFactFragment : ScopedFragment(), KodeinAware {
 
     override val kodein by closestKodein()
 
-    private val viewModelFactoryInstanceFactory :
+    private val viewModelFactoryInstanceFactory:
             ((Int) -> DetailOfDogFactsViewModelFactory) by factory()
 
     private lateinit var viewModel: DetailOfDogFactViewModel
@@ -54,7 +54,6 @@ class DetailOfDogFactFragment : ScopedFragment(), KodeinAware {
 
             updateRandomBackground()
             updateTitle("Dog Fact")
-            dogFactEntry.id?.let { updateFactNumber(it) }
             updateFetchDate(dogFactEntry.fetchedTime)
             updateFact(dogFactEntry.fact)
         })
@@ -62,10 +61,6 @@ class DetailOfDogFactFragment : ScopedFragment(), KodeinAware {
 
     private fun updateTitle(title: String) {
         (activity as? AppCompatActivity)?.supportActionBar?.title = title
-    }
-
-    private fun updateFactNumber(factId: Int) {
-        tv_fact_id.text = "Fact #$factId"
     }
 
     private fun updateFetchDate(date: LocalDate) {
@@ -77,8 +72,10 @@ class DetailOfDogFactFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun updateRandomBackground() {
-        val backgroundList = listOf(R.drawable.iv_background_1, R.drawable.iv_background_2,
-            R.drawable.iv_background_3, R.drawable.iv_background_4)
+        val backgroundList = listOf(
+            R.drawable.iv_background_1, R.drawable.iv_background_2,
+            R.drawable.iv_background_3, R.drawable.iv_background_4
+        )
 
         ll_detail.setBackgroundResource(backgroundList.random())
     }

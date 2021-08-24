@@ -13,7 +13,7 @@ interface DogFactsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(dogFactEntries: List<DogFactItem>)
 
-    @Query("SELECT * FROM dog_facts" )
+    @Query("SELECT * FROM dog_facts")
     fun getDogFacts(): LiveData<List<DogFactItem>>
 
     @Query("SELECT * FROM dog_facts WHERE id = :itemId")

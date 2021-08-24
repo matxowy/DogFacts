@@ -11,4 +11,8 @@ class ListOfDogFactsViewModel(
     val dogFactsEntries by lazyDeferred {
         dogFactsRepository.getDogFacts()
     }
+
+    suspend fun refreshDogFacts() {
+        dogFactsRepository.getNewDogFactsEntries()
+    }
 }

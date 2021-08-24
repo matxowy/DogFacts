@@ -17,7 +17,8 @@ abstract class DogFactsDatabase : RoomDatabase() {
     abstract fun dogFactsDao(): DogFactsDao
 
     companion object {
-        @Volatile private var instance: DogFactsDatabase? = null
+        @Volatile
+        private var instance: DogFactsDatabase? = null
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
@@ -25,8 +26,10 @@ abstract class DogFactsDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext,
-                DogFactsDatabase::class.java, "facts.db")
+            Room.databaseBuilder(
+                context.applicationContext,
+                DogFactsDatabase::class.java, "facts.db"
+            )
                 .build()
     }
 }

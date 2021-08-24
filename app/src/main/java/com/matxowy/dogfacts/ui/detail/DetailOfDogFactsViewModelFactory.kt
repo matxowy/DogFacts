@@ -7,7 +7,7 @@ import com.matxowy.dogfacts.data.repository.DogFactsRepository
 class DetailOfDogFactsViewModelFactory(
     private val itemId: Int,
     private val dogFactsRepository: DogFactsRepository
-): ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
